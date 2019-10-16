@@ -1,0 +1,22 @@
+{
+    "name": "ryu/seat_tax",
+    "description": "tax",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "KennethRyu",
+            "email": "xlong.xyi@163.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {
+        "php": ">=7.1"
+    },
+    "autoload":{
+        "psr-4":{
+            "Ryu\\EveSeAT\\Tax\\":"src"
+        }
+    }
+
+}
