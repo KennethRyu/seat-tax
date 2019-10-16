@@ -11,7 +11,9 @@
     ],
     "minimum-stability": "dev",
     "require": {
-        "php": ">=7.1"
+        "php": ">=7.1",
+        "laravel/framework": "5.5.*",
+        "eveseat/web": "~3.0.15"
     },
     "autoload":{
         "psr-4":{
