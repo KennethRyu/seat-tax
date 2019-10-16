@@ -7,7 +7,7 @@
  */
 
 return [
-    'seatgroups' => [
+    'seat_tax' => [
         'view',
         'create',
         'missing_refresh_token_notification',

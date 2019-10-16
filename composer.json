@@ -1,7 +1,12 @@
 {
     "name": "ryu/seat_tax",
     "description": "tax",
-    "type": "library",
+    "type": "seat-plugin",
+    "require": {
+        "php": ">=7.1",
+        "laravel/framework": "5.5.*",
+        "eveseat/web": "~3.0.15"
+    },
     "license": "MIT",
     "authors": [
         {
@@ -10,14 +15,17 @@
         }
     ],
     "minimum-stability": "dev",
-    "require": {
-        "php": ">=7.1",
-        "laravel/framework": "5.5.*",
-        "eveseat/web": "~3.0.15"
-    },
+
     "autoload":{
         "psr-4":{
             "Ryu\\EveSeAT\\Tax\\":"src"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Ryu\\EveSeAT\\Tax\\TaxServiceProvider"
+            ]
         }
     }
 

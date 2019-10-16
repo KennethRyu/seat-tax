@@ -2,9 +2,25 @@
 
 namespace Ryu\EveSeAT\Tax;
 
-use Illuminate\Support\ServiceProvider;
+use Herpaderpaldent\Seat\SeatGroups\Events\GroupApplication;
+use Herpaderpaldent\Seat\SeatGroups\Events\GroupSynced;
+use Herpaderpaldent\Seat\SeatGroups\Events\GroupSyncFailed;
+use Herpaderpaldent\Seat\SeatGroups\Events\MissingRefreshToken;
+use Herpaderpaldent\Seat\SeatGroups\Listeners\CreateSyncedSeatLogsEntry;
+use Herpaderpaldent\Seat\SeatGroups\Listeners\CreateSyncFailedLogsEntry;
+use Herpaderpaldent\Seat\SeatGroups\Listeners\GroupApplicationNotification;
+use Herpaderpaldent\Seat\SeatGroups\Listeners\GroupSyncedNotification;
+use Herpaderpaldent\Seat\SeatGroups\Listeners\GroupSyncFailedNotification;
+use Herpaderpaldent\Seat\SeatGroups\Listeners\MissingRefreshTokenLogsEntry;
+use Herpaderpaldent\Seat\SeatGroups\Listeners\MissingRefreshTokenNotification;
+use Herpaderpaldent\Seat\SeatGroups\Observers\RefreshTokenObserver;
 
-class TaxServiceProvider extends ServiceProvider
+use Illuminate\Support\Arr;
+
+use Seat\Eveapi\Models\RefreshToken;
+use Seat\Services\AbstractSeatPlugin;
+
+class TaxServiceProvider extends AbstractSeatPlugin
 {
 
     /**
@@ -15,6 +31,7 @@ class TaxServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        var_dump(123);die;
         //
         $this->addCommands();
         // 路由
@@ -57,7 +74,7 @@ class TaxServiceProvider extends ServiceProvider
     private function addCommands()
     {
         $this->commands([
-            Commands\SeatGroupsUsersUpdate::class,
+            Commands\SeatTaxUpdate::class,
         ]);
     }
 
@@ -73,7 +90,7 @@ class TaxServiceProvider extends ServiceProvider
 
     private function addViews()
     {
-        $this->loadViewsFrom(__DIR__ . '/resources/views', 'seatgroups');
+        $this->loadViewsFrom(__DIR__ . '/resources/views', 'seat_tax');
     }
 
     /**
@@ -81,7 +98,7 @@ class TaxServiceProvider extends ServiceProvider
      */
     private function addTranslations()
     {
-        $this->loadTranslationsFrom(__DIR__ . '/lang', 'seatgroups');
+        $this->loadTranslationsFrom(__DIR__ . '/lang', 'seat_tax');
     }
 
     /**
@@ -89,16 +106,16 @@ class TaxServiceProvider extends ServiceProvider
      */
     private function add_events()
     {
-        $this->app->events->listen(GroupSynced::class, CreateSyncedSeatLogsEntry::class);
-        $this->app->events->listen(GroupSynced::class, GroupSyncedNotification::class);
-
-        $this->app->events->listen(GroupSyncFailed::class, CreateSyncFailedLogsEntry::class);
-        $this->app->events->listen(GroupSyncFailed::class, GroupSyncFailedNotification::class);
-
-        $this->app->events->listen(MissingRefreshToken::class, MissingRefreshTokenLogsEntry::class);
-        $this->app->events->listen(MissingRefreshToken::class, MissingRefreshTokenNotification::class);
-
-        $this->app->events->listen(GroupApplication::class, GroupApplicationNotification::class);
+//        $this->app->events->listen(GroupSynced::class, CreateSyncedSeatLogsEntry::class);
+//        $this->app->events->listen(GroupSynced::class, GroupSyncedNotification::class);
+//
+//        $this->app->events->listen(GroupSyncFailed::class, CreateSyncFailedLogsEntry::class);
+//        $this->app->events->listen(GroupSyncFailed::class, GroupSyncFailedNotification::class);
+//
+//        $this->app->events->listen(MissingRefreshToken::class, MissingRefreshTokenLogsEntry::class);
+//        $this->app->events->listen(MissingRefreshToken::class, MissingRefreshTokenNotification::class);
+//
+//        $this->app->events->listen(GroupApplication::class, GroupApplicationNotification::class);
     }
 
     /**
@@ -209,6 +226,6 @@ class TaxServiceProvider extends ServiceProvider
     public function getVersion(): string
     {
 
-        return config('seatgroups.config.version');
+        return config('tax.config.version');
     }
 }

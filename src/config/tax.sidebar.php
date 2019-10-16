@@ -2,22 +2,22 @@
 
 return [
     'seat_tax' => [
-        'name'          => 'SeAT Tax',
+        'name'          => 'SeAT税务',
         'icon'          => 'fa-group',
-        'route_segment' => 'seatgroups',
-        'permission'    => 'seatgroups.view',
+        'route_segment' => 'seat_tax',
+        'permission'    => 'seat_tax.view',
         'entries' => [
             [
-                'name'  => 'SeAT Groups',
+                'name'  => '税务账单',
                 'icon'  => 'fa-gear',
-                'route' => 'seatgroups.index',
-                'permission'    => 'seatgroups.view',
+                'permission'    => 'seat_tax.view',
+                'route' => 'seat_tax.index',
             ],
             [
-                'name'  => 'About',
+                'name'  => '关于',
                 'icon'  => 'fa-info-circle',
-                'permission' => 'seatgroups.view',
-                'route' => 'seatgroups.about',
+                'permission' => 'seat_tax.view',
+                'route' => 'seat_tax.about',
             ],
         ],
     ],
