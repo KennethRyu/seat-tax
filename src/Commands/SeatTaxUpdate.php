@@ -1,10 +1,5 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Mutterschiff
- * Date: 06.02.2018
- * Time: 23:22.
- */
+
 
 namespace Ryu\Seat\Tax\Commands;
 
