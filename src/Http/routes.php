@@ -25,7 +25,7 @@
 
 
 Route::group([
-    'namespace'  => 'Ryu\EveSeAT\Tax\Http\Controllers',
+    'namespace'  => 'Ryu\Seat\Tax\Http\Controllers',
     'prefix'     => 'seattax',
     'middleware' => ['web', 'auth', 'bouncer:seatgroups.view'],
 ], function () {
