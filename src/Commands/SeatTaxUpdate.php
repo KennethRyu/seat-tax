@@ -6,7 +6,7 @@
  * Time: 23:22.
  */
 
-namespace Ryu\EveSeAT\Tax\Commands;
+namespace Ryu\Seat\Tax\Commands;
 
 use Herpaderpaldent\Seat\SeatGroups\Jobs\GroupDispatcher;
 use Herpaderpaldent\Seat\SeatGroups\Jobs\GroupSync;
