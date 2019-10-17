@@ -15,10 +15,11 @@ use Denngarr\Seat\Billing\Helpers\BillingHelper;
 
 class TaxController extends Controller
 {
-    use MiningLedger, Ledger, CharacterLedger, BillingHelper;
+//    use MiningLedger, Ledger, CharacterLedger, BillingHelper;
 
-    public function index(int $alliance_id = 0)
+    public function index()
     {
+        var_dump(123);die;
         $start_date = carbon()->startOfMonth()->toDateString();
         $end_date = carbon()->endOfMonth()->toDateString();
         DB::connection()->enableQueryLog();
