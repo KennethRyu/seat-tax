@@ -15,11 +15,10 @@ use Denngarr\Seat\Billing\Helpers\BillingHelper;
 
 class TaxController extends Controller
 {
-//    use MiningLedger, Ledger, CharacterLedger, BillingHelper;
+    use MiningLedger, Ledger, CharacterLedger, BillingHelper;
 
     public function index()
     {
-        var_dump(123);die;
         $start_date = carbon()->startOfMonth()->toDateString();
         $end_date = carbon()->endOfMonth()->toDateString();
         DB::connection()->enableQueryLog();
@@ -70,8 +69,8 @@ class TaxController extends Controller
             ->groupBy('corporation_id', 'alliance_id', 'name', 'tax_rate', 'mining', 'bounties')
             ->orderBy('name');
 
-        if ($alliance_id !== 0)
-            $stats->where('alliance_id', $alliance_id);
+//        if ($alliance_id !== 0)
+//            $stats->where('alliance_id', $alliance_id);
 
         // 统计数据
         $stats = $stats->get();

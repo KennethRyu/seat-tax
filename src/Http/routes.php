@@ -11,7 +11,7 @@ Route::group([
         'uses' => 'TaxController@index',
     ]);
 
-    Route::get('/', [
+    Route::get('/about', [
         'as'   => 'seat_tax.about',
         'uses' => 'TaxController@about',
     ]);
