@@ -18,13 +18,13 @@
 
     "autoload":{
         "psr-4":{
-            "Ryu\\EveSeAT\\Tax\\":"src"
+            "Ryu\\Seat\\Tax\\":"src"
         }
     },
     "extra": {
         "laravel": {
             "providers": [
-                "Ryu\\EveSeAT\\Tax\\TaxServiceProvider"
+                "Ryu\\Seat\\Tax\\TaxServiceProvider"
             ]
         }
     }

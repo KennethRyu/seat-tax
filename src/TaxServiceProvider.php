@@ -1,6 +1,6 @@
 <?php
 
-namespace Ryu\EveSeAT\Tax;
+namespace Ryu\Seat\Tax;
 
 use Herpaderpaldent\Seat\SeatGroups\Events\GroupApplication;
 use Herpaderpaldent\Seat\SeatGroups\Events\GroupSynced;
@@ -31,7 +31,7 @@ class TaxServiceProvider extends AbstractSeatPlugin
      */
     public function boot()
     {
-        var_dump(123);die;
+
         //
         $this->addCommands();
         // 路由
