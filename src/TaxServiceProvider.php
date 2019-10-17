@@ -59,16 +59,16 @@ class TaxServiceProvider extends AbstractSeatPlugin
     public function register()
     {
         // 允许
-        $this->mergeConfigFrom(__DIR__ . '/config/tax.permission.php', 'seat_tax.permissions');
+        $this->mergeConfigFrom(__DIR__ . '/config/tax.permission.php', 'web.permissions');
 
         // 配置
         $this->mergeConfigFrom(__DIR__ . '/config/tax.config.php', 'seat_tax.config');
 
         // 侧边栏
-        $this->mergeConfigFrom(__DIR__ . '/config/tax.sidebar.php', 'seat_tax.sidebar');
+        $this->mergeConfigFrom(__DIR__ . '/config/tax.sidebar.php', 'package.sidebar');
 
         // 服务
-        $this->mergeConfigFrom(__DIR__ . '/config/tax.services.php', 'seat_tax.services');
+        $this->mergeConfigFrom(__DIR__ . '/config/tax.services.php', 'services');
     }
 
     private function addCommands()
