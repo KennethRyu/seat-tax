@@ -3,12 +3,17 @@
 Route::group([
     'namespace'  => 'Ryu\Seat\Tax\Http\Controllers',
     'prefix'     => 'seat_tax',
-    'middleware' => ['web', 'auth', 'bouncer:seattax.view'],
+    'middleware' => ['web', 'auth', 'bouncer:seat_tax.view'],
 ], function () {
 
     Route::get('/', [
-        'as'   => 'seat_tax.view',
-        'uses' => 'TaxController@getLiveBillingView',
+        'as'   => 'seat_tax.index',
+        'uses' => 'TaxController@index',
+    ]);
+
+    Route::get('/', [
+        'as'   => 'seat_tax.about',
+        'uses' => 'TaxController@about',
     ]);
 
     Route::get('/alliance/{alliance_id}', [
@@ -40,5 +45,6 @@ Route::group([
         'as'   => 'seat_tax.getindbilling',
         'uses' => 'TaxController@getPastUserBilling',
     ]);
+
 
 });
