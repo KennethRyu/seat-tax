@@ -2,42 +2,42 @@
 
 Route::group([
     'namespace'  => 'Ryu\Seat\Tax\Http\Controllers',
-    'prefix'     => 'seattax',
+    'prefix'     => 'seat_tax',
     'middleware' => ['web', 'auth', 'bouncer:seattax.view'],
 ], function () {
 
     Route::get('/', [
-        'as'   => 'seattax.view',
+        'as'   => 'seat_tax.view',
         'uses' => 'TaxController@getLiveBillingView',
     ]);
 
     Route::get('/alliance/{alliance_id}', [
-        'as'   => 'seattax.allianceview',
+        'as'   => 'seat_tax.allianceview',
         'uses' => 'TaxController@getLiveBillingView',
     ]);
 
     Route::get('/settings', [
-        'as'   => 'seattax.settings',
+        'as'   => 'seat_tax.settings',
         'uses' => 'TaxController@getBillingSettings',
     ]);
 
     Route::post('/settings', [
-        'as'   => 'seattax.savesettings',
+        'as'   => 'seat_tax.savesettings',
         'uses' => 'TaxController@saveBillingSettings',
     ]);
 
     Route::get('/getindbilling/{id}', [
-        'as'   => 'seattax.getindbilling',
+        'as'   => 'seat_tax.getindbilling',
         'uses' => 'TaxController@getUserBilling',
     ]);
 
     Route::get('/pastbilling/{year}/{month}', [
-        'as'   => 'seattax.pastbilling',
+        'as'   => 'seat_tax.pastbilling',
         'uses' => 'TaxController@previousBillingCycle',
     ]);
 
     Route::get('/getindpastbilling/{id}/{year}/{month}', [
-        'as'   => 'seattax.getindbilling',
+        'as'   => 'seat_tax.getindbilling',
         'uses' => 'TaxController@getPastUserBilling',
     ]);
 
