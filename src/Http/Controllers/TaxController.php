@@ -84,10 +84,6 @@ class TaxController extends Controller
 //        return view('seat_tax::summary');
     }
 
-    public function about(){
-
-    }
-
     private function getCorporations()
     {
         if (auth()->user()->hasSuperUser()) {

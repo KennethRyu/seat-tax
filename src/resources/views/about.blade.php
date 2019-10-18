@@ -1,0 +1,127 @@
+@extends('web::layouts.grids.4-4-4')
+
+@section('title', trans('seatgroups::seat.seat_groups'))
+@section('page_header', trans('seatgroups::seat.seat_groups'))
+@section('page_description', trans('seatgroups::seat.seat_groups_about'))
+
+@section('left')
+
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h3 class="panel-title">SeAT-Groups</h3>
+    </div>
+    <div class="panel-body">
+      <div class="box-body">
+
+        <legend>Thank you</legend>
+
+        <p>Since SeAT 3.0 beta has launched SeAT Groups has been downloaded almost 400 times. I am very content that my package is being used and supports you and your members.</p>
+
+        <p>As you might know, <code>SeAT</code> and <code>SeAT-Groups</code> are OpenSource Projects which are available free of charge. However, programming takes up a lot of time which keeps me away from the game.</p>
+
+        <p>If you like <code>SeAT-Groups</code>, i highly appreciate ISK Donations to <a href="https://evewho.com/pilot/Herpaderp%20Aldent/"> {!! img('character', 95725047, 64, ['class' => 'img-circle eve-icon small-icon']) !!} Herpaderp Aldent</a></p>
+
+        </div>
+    </div>
+  </div>
+
+@stop
+
+@section('center')
+
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h3 class="panel-title">关于</h3>
+    </div>
+    <div class="panel-body">
+
+      <legend>错误和问题</legend>
+
+      <p>如果您发现某些功能无法正常工作，请随时与我联系。 使用SeAT-Slack或在<a href="https://github.com/herpaderpaldent/seat-groups/issues/new">Github</a>上提交问题 </p>
+
+    </div>
+  </div>
+
+  @if(auth()->user()->has('seatgroups.create', false))
+    <div class="box box-default">
+      <div class="box-header with-border">
+        <i class="fa fa-refresh"></i>
+
+        <h3 class="box-title">{{ trans('web::seat.update') }} {{ trans('seatgroups::seat.seat_groups') }}</h3>
+
+
+      </div>
+      <!-- /.box-header -->
+      <div class="box-body">
+        <a href="{{route('seatgroup.user.update')}}" class="btn btn-block btn-primary" role="button">{{ trans('seatgroups::seat.seat_groups') }} {{ trans_choice('web::seat.user',2) }} {{ trans('web::seat.update') }}</a>
+
+      </div>
+      <!-- /.box-body -->
+    </div>
+
+    <div class="box box-default">
+      <div class="box-header with-border">
+        <i class="fa fa-archive"></i>
+
+        <h3 class="box-title">Last {{trans('seatgroups::seat.event')}} Log</h3>
+
+        <span class="log-clear-button"></span>
+
+
+      </div>
+      <!-- /.box-header -->
+      <div class="box-body">
+
+        @include('seatgroups::logs.list')
+
+      </div>
+      <!-- /.box-body -->
+    </div>
+  @endif
+
+@stop
+
+@section('right')
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h3 class="panel-title"><i class="fa fa-rss"></i> 更新提要</h3>
+    </div>
+    <div class="panel-body" style="height: 500px; overflow-y: scroll">
+      {!! $changelog !!}
+    </div>
+    <div class="panel-footer">
+      <div class="row">
+        <div class="col-md-6">
+          Installed version: <b>{{ config('seatgroups.config.version') }}</b>
+        </div>
+        <div class="col-md-6">
+          Latest version:
+          <a href="https://packagist.org/packages/herpaderpaldent/seat-groups">
+            <img src="https://poser.pugx.org/herpaderpaldent/seat-groups/v/stable" alt="SeAT Groups version" />
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+@stop
+
+@push('javascript')
+  <script type="text/javascript">
+    $(document).ready(function() {
+      $('.log-clear-button').each(function () {
+        $.ajax({
+          type   : 'GET',
+          url    : "{{route('logs.get.delete.button')}}",
+          success: function (result) {
+            $(".log-clear-button").html(result)
+          },
+          error  : function (xhr, textStatus, errorThrown) {
+            console.log(xhr);
+            console.log(textStatus);
+            console.log(errorThrown);
+          }
+        });
+      });
+    })
+  </script>
+@endpush

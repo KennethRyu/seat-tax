@@ -170,7 +170,6 @@ class TaxServiceProvider extends AbstractSeatPlugin
      */
     public function getChangelogUri(): ?string
     {
-
         return 'https://raw.githubusercontent.com/herpaderpaldent/seat-groups/master/CHANGELOG.md';
     }
 
@@ -181,51 +180,50 @@ class TaxServiceProvider extends AbstractSeatPlugin
      */
     public function getName(): string
     {
-
         return 'seat-tax';
     }
 
     /**
      * Return the plugin repository address.
+     * 返回插件存储库地址。
      *
      * @return string
      */
     public function getPackageRepositoryUrl(): string
     {
-
         return 'https://github.com/herpaderpaldent/seat-groups';
     }
 
     /**
      * Return the plugin technical name as published on package manager.
+     * 返回在软件包管理器上发布的插件技术名称。
      *
      * @return string
      */
     public function getPackagistPackageName(): string
     {
-
-        return 'seat-groups';
+        return 'seat-tax';
     }
 
     /**
      * Return the plugin vendor tag as published on package manager.
+     * 返回在软件包管理器上发布的插件供应商标签。
      *
      * @return string
      */
     public function getPackagistVendorName(): string
     {
-
-        return 'herpaderpaldent';
+        return 'Ryu';
     }
 
     /**
      * Return the plugin installed version.
+     * 返回插件的安装版本。
      *
      * @return string
      */
     public function getVersion(): string
     {
-
         return config('tax.config.version');
     }
 }

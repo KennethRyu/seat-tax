@@ -13,7 +13,7 @@ Route::group([
 
     Route::get('/about', [
         'as'   => 'seat_tax.about',
-        'uses' => 'TaxController@about',
+        'uses' => 'AboutController@index',
     ]);
 
     Route::get('/alliance/{alliance_id}', [

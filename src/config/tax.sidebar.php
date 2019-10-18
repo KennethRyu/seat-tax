@@ -9,15 +9,21 @@ return [
         'entries' => [
             [
                 'name'  => '税务账单',
-                'icon'  => 'fa-gear',
-                'permission'    => 'seat_tax.view',
+                'icon'  => 'fa-money',
                 'route' => 'seat_tax.index',
+                'permission'    => 'seat_tax.view',
+            ],
+            [
+                'name' => '设置',
+                'icon' => 'fa-gear',
+                'route' => 'seat_tax.settings',
+                'permission' => 'seat_tax.view',
             ],
             [
                 'name'  => '关于',
                 'icon'  => 'fa-info-circle',
-                'permission' => 'seat_tax.view',
                 'route' => 'seat_tax.about',
+                'permission' => 'seat_tax.view',
             ],
         ],
     ],
