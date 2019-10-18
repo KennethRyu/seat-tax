@@ -23,12 +23,12 @@ Route::group([
 
     Route::get('/settings', [
         'as'   => 'seat_tax.settings',
-        'uses' => 'TaxController@getBillingSettings',
+        'uses' => 'SettingsController@index',
     ]);
 
     Route::post('/settings', [
         'as'   => 'seat_tax.savesettings',
-        'uses' => 'TaxController@saveBillingSettings',
+        'uses' => 'SettingsController@save',
     ]);
 
     Route::get('/getindbilling/{id}', [
