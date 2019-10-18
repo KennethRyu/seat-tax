@@ -8,51 +8,23 @@
 
 return [
 
-    'seat_groups'           => 'SeAT 组别',
-    'seat_groups_dashboard' => 'Dashboard',
+    // setting - right
+    'Ore value modifier'      => 'Ore value modifier',
+    'Ore value modifier Desc' => 'This is a modifier used on the base costs of the ore/minerals/goo to adjust for inflation/deflation during the billing period.  Normally this is 90-95%',
 
-    'seat_groups_autogroup' => 'Auto SeAT Groups',
-    'seat_groups_autogroup_description' => 'To these SeAT Groups you are automatically assigned based on your corporation membership',
+    'Ore Tax Rate'            => 'Ore Tax Rate',
+    'Ore Tax Rate Desc'       => 'Rate to tax on value of the mined materials',
 
-    'seat_groups_opengroup' => 'Open SeAT Groups',
-    'seat_groups_opengroup_description' => 'In these SeAT Groups you can freely opt-in and opt-out as you wish.',
+    'Ore Refining Rate'       => 'Ore Refining Rate',
+    'Ore Refining Rate Desc'  => 'This should be the max refine amount in your area.  Max rates with RX-804 implant, level V skills, and a T2 Rigged Tatara is 89.4%.  Adjust this as you see fit, but I recommend using the maximum rate available to your members in your area of space.',
 
-    'seat_groups_managedgroup'             => 'Managed SeAT Groups',
-    'seat_groups_managedgroup_description' => 'Here you can apply for certain groups. The managers of this group will approve or deny your request.',
-    'seat_groups_manager'                  => 'Manager',
-    'seat_join_opengroup'                  => 'Opt in',
-    'seat_leave_opengroup'                 => 'Opt out',
-    'seat_leave_waitlist'                  => 'Leave waitlist',
-    'seat_join_waitlist'                   => 'Apply',
-    'seat_leave_managedgroup'              => 'Leave',
-    'seat_deny_managedgroup'               => 'Reject',
-    'seat_accept_managedgroup'             => 'Accept',
-    'seat_removefrom_managedgroup'         => 'Remove',
-    'manage_members'                       => 'Manage Members',
-    'available_seatgroups'                 => 'Available SeAT Groups as Manager',
+    'Bounty Tax Rate'         => 'Bounty Tax Rate',
+    'Bounty Tax Rate Desc'    => 'Rate of ratting bounties to tax.  Usually 5-10%',
 
-    'seat_groups_hiddengroup' => 'Hidden SeAT Group',
-    'seat_groups_user'        => 'User',
-    'seat_groups_adduser'     => 'Add User',
+    'Incentivised Rates'      => 'Incentivised Rates',
+    'Incentivised Rates Desc' => 'Incentivised rates are on a per-corporation basis only.  These are discounted rates based on the number of members in the corp have signed up on Seat, including all alts.  If they\'re not signed up on SeAT, the alliance is not seeing their mining amounts, therefore, they get higher tax rates.',
 
-    'seat_groups_create'      => 'Create',
-    'seat_groups_create_new'  => 'Create a new SeAT Group',
-    'seat_groups_name'        => 'Name',
-    'seat_groups_description' => 'SeAT Group Description',
-    'seat_groups_type'        => 'Select SeAT Group Type',
-    'seat_groups_role'        => 'Select corresponding SeAT Role',
-    'seat_groups_add'         => 'Add new SeAT Group',
-
-    'seat_groups_edit'    => 'Add new SeAT Group',
-    'seat_groups_editing' => 'Editing',
-    'seat_groups_update'  => 'Update SeAT Group',
-
-    'seat_groups_about' => 'About',
-
-    'available_alliances' => 'Available Alliances',
-    'add_alliance'        => 'Add Alliance',
-
-    //Event Log
-    'event' => 'Event',
+    'Valuation of Ore'        => 'Valuation of Ore',
+    'Valuation of Ore Desc'   => 'Value of ore can be determined with two methods:  By ore type OR By mineral content.  If you are moon mining, it\'s better to use mineral content as it\'s more accurate as Moon Goo is rarely sold by the raw ore, but more often as refined products.  This keeps the moon mining honest.',
 
 ];
