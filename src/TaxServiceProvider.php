@@ -20,6 +20,8 @@ use Illuminate\Support\Arr;
 use Seat\Eveapi\Models\RefreshToken;
 use Seat\Services\AbstractSeatPlugin;
 
+use Ryu\Seat\Tax\Commands\TaxUpdate;
+
 class TaxServiceProvider extends AbstractSeatPlugin
 {
 
@@ -74,7 +76,7 @@ class TaxServiceProvider extends AbstractSeatPlugin
     private function addCommands()
     {
         $this->commands([
-            Commands\SeatTaxUpdate::class,
+            TaxUpdate::class,
         ]);
     }
 

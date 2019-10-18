@@ -18,9 +18,19 @@ return [
     'pastbill'                             => 'Past Billing Invoices',
     'previousbill'                         => 'Previous Bills',
 
+    'update' => '更新',
+
     // setting - left
+    'default-settings'        => '默认设置',
+    'incentivized-settings'   => '鼓励设置',
+    'valuation-of-ore'        => '矿石估价',
+
+    'value-at-ore-price'      => '矿石价格',
+    'value-at-mineral-price'  => '矿物价格',
 
     // setting - right
+    'setting-instructions'    => '设置说明',
+
     'Ore value modifier'      => '矿石价值修正',
     'Ore value modifier Desc' => '这是根据矿石/矿产/黏性物质的基本成本修改的，用于在结算期间针对通胀/通货紧缩进行调整。 通常这是90-95％',
 

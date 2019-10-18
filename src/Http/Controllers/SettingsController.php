@@ -9,7 +9,7 @@ class SettingsController extends Controller
 {
 
     public function index(){
-        return view('seat_tax::settings');
+        return view('seat_tax::Settings/settings');
     }
 
     public function save(ValidateSettings $request){

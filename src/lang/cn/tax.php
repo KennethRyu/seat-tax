@@ -8,7 +8,19 @@
 
 return [
 
+    'update' => 'Update',
+
+    // setting - left
+    'default-settings'        => 'Default Settings',
+    'incentivized-settings'   => 'Incentivized Settings',
+    'valuation-of-ore'        => 'Valuation of Ore',
+
+    'value-at-ore-price'      => 'Value at Ore Price',
+    'value-at-mineral-price'  => 'Value at Mineral Price',
+
     // setting - right
+    'setting-instructions'    => 'Setting instructions',
+
     'Ore value modifier'      => 'Ore value modifier',
     'Ore value modifier Desc' => 'This is a modifier used on the base costs of the ore/minerals/goo to adjust for inflation/deflation during the billing period.  Normally this is 90-95%',
 

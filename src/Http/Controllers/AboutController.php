@@ -31,7 +31,7 @@ class AboutController extends Controller
 
         $changelog = $parser->parse($response->getBody());
 
-        return view('seat_tax::about', compact('changelog'));
+        return view('seat_tax::About/about', compact('changelog'));
     }
 
 

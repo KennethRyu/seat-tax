@@ -9,10 +9,15 @@ use Illuminate\Console\Command;
 use Seat\Web\Models\Group;
 use Seat\Web\Models\User;
 
-class SeatTaxUpdate extends Command
+class TaxUpdate extends Command
 {
 
-    protected $signature = 'seat-groups:users:update {--character_ids= : The id list of characters in SeAT (using , as separator)}';
+    /**
+     * 控制台命令的名称和签名。
+     *
+     * @var string
+     */
+    protected $signature = 'tax:update {--F|force} {year?} {month?}';
 
     protected $description = 'Fire a job which attempts to add and remove roles to all user groups depending on their SeAT-Group Association';
 
