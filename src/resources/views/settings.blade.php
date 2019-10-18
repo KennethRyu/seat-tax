@@ -1,7 +1,7 @@
 @extends('web::layouts.grids.6-6')
 
-@section('title', trans('billing::billing.settings'))
-@section('page_header', trans('billing::billing.settings'))
+@section('title', trans('seat_tax::tax.settings'))
+@section('page_header', trans('seat_tax::tax.settings'))
 
 @section('left')
     <div class="box box-success box-solid">
@@ -124,11 +124,11 @@
 @section('right')
     <div class="box box-success box-solid">
         <div class="box-header with-border">
-            <h3 class="box-title">{{ trans('billing::billing.settings') }}</h3>
+            <h3 class="box-title">{{ trans('seat_tax::tax.settings') }}</h3>
         </div>
         <div class="box-body">
             <div class="col-sm-12">
-                <p><label>Ore value modifier:</label> This is a modifier used on the base costs of the ore/minerals/goo to adjust for inflation/deflation during the billing period.  Normally this is 90-95% </p>
+                <p><label>{{ trans('seat_tax::tax.Ore value modifier') }}:</label> This is a modifier used on the base costs of the ore/minerals/goo to adjust for inflation/deflation during the billing period.  Normally this is 90-95% </p>
             </div>
             <div class="col-sm-12">
                 <p><label>Ore Tax Rate:</label> Rate to tax on value of the mined materials. </p>
