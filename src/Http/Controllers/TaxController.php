@@ -17,7 +17,7 @@ class TaxController extends Controller
 {
     use MiningLedger, Ledger, CharacterLedger, BillingHelper;
 
-    public function index()
+    public function index(int $alliance_id = 0)
     {
         $start_date = carbon()->startOfMonth()->toDateString();
         $end_date = carbon()->endOfMonth()->toDateString();
@@ -69,8 +69,8 @@ class TaxController extends Controller
             ->groupBy('corporation_id', 'alliance_id', 'name', 'tax_rate', 'mining', 'bounties')
             ->orderBy('name');
 
-//        if ($alliance_id !== 0)
-//            $stats->where('alliance_id', $alliance_id);
+        if ($alliance_id !== 0)
+            $stats->where('alliance_id', $alliance_id);
 
         // 统计数据
         $stats = $stats->get();
@@ -80,12 +80,16 @@ class TaxController extends Controller
         // 日期
         $dates = $this->getCorporationBillingMonths($stats->pluck('corporation_id')->toArray());
 
-        return view('seat_tax::summary', compact('alliances', 'stats', 'dates'));
-//        return view('seat_tax::summary');
+        return view('seat_tax::Tax/summary', compact('alliances', 'stats', 'dates'));
+
     }
 
-    private function getCorporations()
-    {
+    /**
+     * 获取公司
+     *
+     * @return mixed
+     */
+    private function getCorporations(){
         if (auth()->user()->hasSuperUser()) {
             $corporations = CorporationInfo::orderBy('name')->get();
         } else {
@@ -93,7 +97,6 @@ class TaxController extends Controller
                 ->select('corporation_id')
                 ->get()
                 ->toArray();
-
             $corporations = CorporationInfo::whereIn('corporation_id', $corpids)->orderBy('name')->get();
         }
 
@@ -101,27 +104,42 @@ class TaxController extends Controller
     }
 
 
-
-    public function getUserBilling($corporation_id)
-    {
+    /**
+     * 获取用户账单
+     *
+     * @param $corporation_id
+     * @return array
+     */
+    public function getUserBilling($corporation_id){
         $summary = $this->getMainsBilling($corporation_id);
-
         return $summary;
     }
 
-    public function getPastUserBilling($corporation_id, $year, $month)
-    {
+    /**
+     * 获取过去的用户帐单
+     *
+     * @param $corporation_id
+     * @param $year
+     * @param $month
+     * @return mixed
+     */
+    public function getPastUserBilling($corporation_id, $year, $month){
         $summary = $this->getPastMainsBillingByMonth($corporation_id, $year, $month);
-
         return $summary;
     }
 
-    public function previousBillingCycle($year, $month)
-    {
+    /**
+     * 上一个帐单周期
+     *
+     * @param $year
+     * @param $month
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function previousBillingCycle($year, $month){
+
         $corporations = $this->getCorporations();
 
         $stats = $this->getCorporationBillByMonth($year, $month)->sortBy('corporation.name');
-
         $dates = $this->getCorporationBillingMonths($corporations->pluck('corporation_id')->toArray());
 
         return view('billing::pastbill', compact('stats', 'dates', 'year', 'month'));
