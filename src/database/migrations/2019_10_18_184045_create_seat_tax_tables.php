@@ -52,11 +52,9 @@ class CreateSeatTaxTables extends Migration
                 $table->engine('InnoDB');
                 $table->increments('id');
                 $table->bigInteger('corporation_id')->comment('公司ID');
-                $table->smallInteger('month')->comment('月份');
-                $table->smallInteger('year')->comment('年份');
-                $table->bigInteger('mining_bill')->comment('采矿账单');
-                $table->smallInteger('mining_taxrate')->comment('采矿税率');
-                $table->smallInteger('mining_modifier');
+                $table->smallInteger('pve_taxrate')->comment('PVE税率');
+                $table->timestamp('begin_time')->comment('开始时间');
+                $table->timestamp('end_time')->comment('结束时间');
                 $table->timestamps();
             });
         }
