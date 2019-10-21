@@ -6,7 +6,7 @@
 @section('left')
     <div class="box box-success box-solid">
         <div class="box-header with-border">
-            <h3 class="box-title">{{ trans('seat_tax::billing.settings') }}</h3>
+            <h3 class="box-title">{{ trans('seat_tax::tax.settings') }}</h3>
         </div>
         <form method="POST" action="{{ route('seat_tax.savesettings')  }}" class="form-horizontal">
             <div class="box-body">

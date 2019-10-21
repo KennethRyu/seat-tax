@@ -9,16 +9,21 @@
 return [
 
     // General
-    'settings'                             => 'Settings',
-    'summary'                              => 'Billing Summary',
-    'summary-live'                         => 'Current Billing Summary',
-    'summary-corp-mining'                  => 'Corporation Mining',
-    'summary-corp-pve'                     => 'Corporation PvE',
-    'summary-ind-mining'                   => 'Individual Mining',
-    'pastbill'                             => 'Past Billing Invoices',
-    'previousbill'                         => 'Previous Bills',
+    'settings'                             => '设置',
+    'summary'                              => '帐单摘要',
+    'summary-live'                         => '税务账单',
+
+    'summary-corp-mining'                  => '公司采矿',
+    'summary-corp-pve'                     => '公司PvE',
+    'summary-ind-mining'                   => '个人采矿',
+
+    'pastbill'                             => '过去的账单',
+    'previousbill'                         => '以前的账单',
 
     'update' => '更新',
+
+    // tax
+    'current-live-numbers'    => '当前数据',
 
     // setting - left
     'default-settings'        => '默认设置',

@@ -19,6 +19,7 @@ class TaxController extends Controller
 
     public function index(int $alliance_id = 0)
     {
+
         $start_date = carbon()->startOfMonth()->toDateString();
         $end_date = carbon()->endOfMonth()->toDateString();
         DB::connection()->enableQueryLog();
@@ -142,6 +143,6 @@ class TaxController extends Controller
         $stats = $this->getCorporationBillByMonth($year, $month)->sortBy('corporation.name');
         $dates = $this->getCorporationBillingMonths($corporations->pluck('corporation_id')->toArray());
 
-        return view('billing::pastbill', compact('stats', 'dates', 'year', 'month'));
+        return view('seat_tax::Tax/pastbill', compact('stats', 'dates', 'year', 'month'));
     }
 }

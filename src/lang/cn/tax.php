@@ -10,6 +10,9 @@ return [
 
     'update' => 'Update',
 
+    // tax
+    'current-live-numbers'    => 'Current Live Numbers',
+
     // setting - left
     'default-settings'        => 'Default Settings',
     'incentivized-settings'   => 'Incentivized Settings',

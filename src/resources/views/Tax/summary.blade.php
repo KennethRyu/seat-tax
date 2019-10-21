@@ -1,12 +1,12 @@
 @extends('web::layouts.grids.12')
 
-@section('title', trans('billing::billing.summary'))
-@section('page_header', trans('billing::billing.summary-live'))
+@section('title', trans('seat_tax::tax.summary'))
+@section('page_header', trans('seat_tax::tax.summary-live'))
 
 @section('full')
   <div class="box box-default box-solid">
     <div class="box-header with-border">
-      <h3 class="box-title">{{ trans('billing::billing.Previous Bills') }}</h3>
+      <h3 class="box-title">{{ trans('seat_tax::tax.previousbill') }}</h3>
     </div>
     <div class="box-body">
       @foreach($dates->chunk(3) as $date)
@@ -15,7 +15,7 @@
             <div class="col-xs-4">
               <span class="text-bold">
                 <a href="{{ route('seat_tax.pastbilling', ['year' => $yearmonth['year'], 'month' => $yearmonth['month']]) }}">
-                {{ date('Y-M', mktime(0,0,0, $yearmonth['month'], 1, $yearmonth['year'])) }}</a>
+                {{ date('Y-m', mktime(0,0,0, $yearmonth['month'], 1, $yearmonth['year'])) }}</a>
               </span>
             </div>
           @endforeach
@@ -26,19 +26,19 @@
 
   <div class="nav-tabs-custom">
     <ul class="nav nav-tabs pull-right bg-gray">
-      <li><a href="#tab3" data-toggle="tab">{{ trans('billing::billing.summary-ind-mining') }}</a></li>
-      <li><a href="#tab2" data-toggle="tab">{{ trans('billing::billing.summary-corp-pve') }}</a></li>
-      <li class="active"><a href="#tab1" data-toggle="tab">{{ trans('billing::billing.summary-corp-mining') }}</a></li>
+      <li><a href="#tab3" data-toggle="tab">{{ trans('seat_tax::tax.summary-ind-mining') }}</a></li>
+      <li><a href="#tab2" data-toggle="tab">{{ trans('seat_tax::tax.summary-corp-pve') }}</a></li>
+      <li class="active"><a href="#tab1" data-toggle="tab">{{ trans('seat_tax::tax.summary-corp-mining') }}</a></li>
       <li class="pull-left header">
-        <i class="fa fa-line-chart"></i> Current Live Numbers
+        <i class="fa fa-line-chart"></i> {{ trans('seat_tax::tax.current-live-numbers') }}
       </li>
     </ul>
     <div class="tab-content">
       <div class="tab-pane active" id="tab1">
         <div class="col-md-12">
           <select class="form-control" style="width: 25%" id="alliancespinner">
-            <option selected disabled>Choose an Alliance</option>
-            <option value="0">All Alliances</option>
+            <option selected disabled>选择一个联盟</option>
+            <option value="0">所有联盟</option>
             @foreach($alliances as $alliance)
               <option value="{{ $alliance->alliance_id }}">{{ $alliance->name }}</option>
             @endforeach
@@ -205,7 +205,20 @@
               window.location.href = '/billing/alliance/' + id;
       });
 
-      $('#livenumbers').DataTable();
+      $('#livenumbers').DataTable({
+          "language": {
+              "lengthMenu": "每页 _MENU_ 条记录",
+              "zeroRecords": "没有找到记录",
+              "info": "第 _PAGE_ 页 ( 总共 _PAGES_ 页 )",
+              "infoEmpty": "无记录",
+              "infoFiltered": "(从 _MAX_ 条记录过滤)",
+              "search": '搜索',
+              "paginate":{
+                  "next":'下一页',
+                  "previous":'上一页'
+              }
+          }
+      });
       $('#livepve').DataTable();
   </script>
 @endpush

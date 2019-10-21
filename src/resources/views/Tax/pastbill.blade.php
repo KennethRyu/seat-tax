@@ -18,7 +18,7 @@
           <div class="col-xs-4">
             <span class="text-bold">
               <a href="{{ route('seat_tax.pastbilling', ['year' => $yearmonth['year'], 'month' => $yearmonth['month']]) }}">
-              {{ date('Y-M', mktime(0,0,0, $yearmonth['month'], 1, $yearmonth['year'])) }}</a>
+              {{ date('Y-m', mktime(0,0,0, $yearmonth['month'], 1, $yearmonth['year'])) }}</a>
             </span>
           </div>
           @endforeach
@@ -33,7 +33,7 @@
       <li><a href="#tab2" data-toggle="tab">{{ trans('billing::billing.summary-corp-pve') }}</a></li>
       <li class="active"><a href="#tab1" data-toggle="tab">{{ trans('billing::billing.summary-corp-mining') }}</a></li>
       <li class="pull-left header">
-        <i class="fa fa-history"></i> Previous Bills
+        <i class="fa fa-history"></i> Previous Bills {{ $year }} - {{ $month }}
       </li>
     </ul>
     <div class="tab-content">

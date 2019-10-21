@@ -13,12 +13,11 @@ Route::group([
     ]);
 
 
-
+    // 联盟账单??
     Route::get('/alliance/{alliance_id}', [
         'as'   => 'seat_tax.allianceview',
         'uses' => 'TaxController@getLiveBillingView',
     ]);
-
 
 
     Route::get('/getindbilling/{id}', [
@@ -26,10 +25,12 @@ Route::group([
         'uses' => 'TaxController@getUserBilling',
     ]);
 
+
     Route::get('/pastbilling/{year}/{month}', [
         'as'   => 'seat_tax.pastbilling',
         'uses' => 'TaxController@previousBillingCycle',
     ]);
+
 
     Route::get('/getindpastbilling/{id}/{year}/{month}', [
         'as'   => 'seat_tax.getindbilling',
