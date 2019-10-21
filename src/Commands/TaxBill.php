@@ -14,7 +14,7 @@ use Denngarr\Seat\Billing\Models\CharacterBill;
 use Denngarr\Seat\Billing\Models\CorporationBill;
 use Denngarr\Seat\Billing\Helpers\BillingHelper;
 
-class TaxUpdate extends Command
+class TaxBill extends Command
 {
 
     /**

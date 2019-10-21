@@ -9,7 +9,7 @@ use Illuminate\Console\Command;
 use Seat\Web\Models\Group;
 use Seat\Web\Models\User;
 
-class TaxRateUpdate extends Command
+class RateChange extends Command
 {
 
     /**
