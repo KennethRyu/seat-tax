@@ -3,11 +3,16 @@
 
 namespace Ryu\Seat\Tax\Commands;
 
-use Herpaderpaldent\Seat\SeatGroups\Jobs\GroupDispatcher;
-use Herpaderpaldent\Seat\SeatGroups\Jobs\GroupSync;
 use Illuminate\Console\Command;
-use Seat\Web\Models\Group;
-use Seat\Web\Models\User;
+use Seat\Eveapi\Models\Character\CharacterInfo;
+use Seat\Eveapi\Models\Industry\CharacterMining;
+use Seat\Eveapi\Models\Corporation\CorporationInfo;
+use Seat\Services\Repositories\Character\MiningLedger as CharacterLedger;
+use Seat\Services\Repositories\Corporation\Ledger;
+use Seat\Services\Repositories\Corporation\MiningLedger;
+use Denngarr\Seat\Billing\Models\CharacterBill;
+use Denngarr\Seat\Billing\Models\CorporationBill;
+use Denngarr\Seat\Billing\Helpers\BillingHelper;
 
 class TaxUpdate extends Command
 {
@@ -19,33 +24,79 @@ class TaxUpdate extends Command
      */
     protected $signature = 'tax:update {--F|force} {year?} {month?}';
 
-    protected $description = 'Fire a job which attempts to add and remove roles to all user groups depending on their SeAT-Group Association';
+    protected $description = '军团税收账单，如果不存在，它将记录上个月的账单。';
 
     public function handle()
     {
 
-        if(! is_null($this->option('character_ids'))) {
-            // transform the argument list in an array
-            $ids = explode(',', $this->option('character_ids'));
-            $group_ids = collect();
+        // 上一个月
+        $lastmonth = date('Y-n', strtotime('-1 month'));
+        list($year, $month) = preg_split("/-/", $lastmonth, 2);
 
-            User::whereIn('id', $ids)->each(function ($user) use ($group_ids) {
-                $group_ids->push($user->group->id);
-            });
+        if (($this->argument('month')) && ($this->argument('year'))) {
+            $year = $this->argument('year');
+            $month = $this->argument('month');
+        }
 
-            Group::whereIn('id', $group_ids->unique())->get()
-                ->filter(function ($users_group) {
-                    return $users_group->main_character_id != '0';
-                })
-                ->each(function ($group) {
-                    dispatch(new GroupSync($group))->onQueue('high');
-                    $this->info(sprintf('A synchronization job has been queued in order to update %s (%s) roles.', $group->main_character->name,
-                        $group->users->map(function ($user) { return $user->name; })->implode(', ')));
-            });
+        if ($this->option('force') == true) {
+            CorporationBill::where('month', $month)
+                ->where('year', $year)
+                ->delete();
+            CharacterBill::where('month', $month)
+                ->where('year', $year)
+                ->delete();
+        }
+        // See if corps already have a bill.  If not, generate one.
+        // 查看军团是否已有账单。 如果没有，请生成一个。
 
-        } else {
-            GroupDispatcher::dispatch()->onQueue('high');
-            $this->info('A synchronization job has been queued in order to update all SeAT Group roles.');
+        // 获取所有公司信息
+        $corps = CorporationInfo::all();
+        foreach ($corps as $corp) {
+            $bill = CorporationBill::where('corporation_id', $corp->corporation_id)
+                ->where('year', $year)
+                ->where('month', $month)
+                ->get();
+
+
+            if ((count($bill) == 0) || ($this->option('force') == true)) {
+                if (!$corp->tax_rate) {
+                    $corp_taxrate = .10;
+                } else {
+                    $corp_taxrate = $corp->tax_rate;
+                }
+                $rates = $this->getCorporateTaxRate($corp->corporation_id);
+
+                $bill = new CorporationBill;
+                $bill->corporation_id = $corp->corporation_id;
+                $bill->year = $year;
+                $bill->month = $month;
+                $bill->mining_bill = $this->getMiningTotal($corp->corporation_id, $year, $month);
+                $bill->pve_bill = $this->getBountyTotal($corp->corporation_id, $year, $month) / $corp_taxrate;
+                $bill->mining_taxrate = $rates['taxrate'];
+                $bill->mining_modifier = $rates['modifier'];
+                $bill->pve_taxrate = $rates['pve'];
+                $bill->save();
+
+                $summary = $this->getMainsBilling($corp->corporation_id, $year, $month);
+
+                foreach ($summary as $character) {
+                    $bill = CharacterBill::where('character_id', $character['id'])
+                        ->where('year', $year)
+                        ->where('month', $month)
+                        ->get();
+                    if ((count($bill) == 0) || ($this->option('force') == true)) {
+                        $bill = new CharacterBill;
+                        $bill->character_id = $character['id'];
+                        $bill->corporation_id = $corp->corporation_id;
+                        $bill->year = $year;
+                        $bill->month = $month;
+                        $bill->mining_bill = $character['amount'];
+                        $bill->mining_taxrate = ($character['taxrate'] * 100);
+                        $bill->mining_modifier = $rates['modifier'];
+                        $bill->save();
+                    }
+                }
+            }
         }
 
     }
