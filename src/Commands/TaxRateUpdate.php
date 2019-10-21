@@ -17,9 +17,12 @@ class TaxRateUpdate extends Command
      *
      * @var string
      */
-    protected $signature = 'rax_rate:update';
+    protected $signature = 'tax:update:corporation_rate_change_log';
 
-    protected $description = '更新军团税率变动';
+    protected $description = '
+        更新公司税率变动日志
+        Update company tax rate change log
+    ';
 
     public function handle()
     {

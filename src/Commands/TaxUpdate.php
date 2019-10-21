@@ -22,9 +22,12 @@ class TaxUpdate extends Command
      *
      * @var string
      */
-    protected $signature = 'tax:update {--F|force} {year?} {month?}';
+    protected $signature = 'tax:update:tax_bill {--F|force} {year?} {month?}';
 
-    protected $description = '军团税收账单，如果不存在，它将记录上个月的账单。';
+    protected $description = '
+        公司的税单不存在，上个月的帐单将被记录。
+        The company tax bill does not exist and the bill for the previous month will be recorded.
+    ';
 
     public function handle()
     {
