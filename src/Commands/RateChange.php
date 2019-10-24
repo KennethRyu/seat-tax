@@ -17,6 +17,7 @@ use Seat\Services\Repositories\Corporation\MiningLedger;
 use Denngarr\Seat\Billing\Models\CharacterBill;
 use Denngarr\Seat\Billing\Models\CorporationBill;
 use Denngarr\Seat\Billing\Helpers\BillingHelper;
+
 use Ryu\Seat\Tax\Models\RateChangeModel;
 
 class RateChange extends Command
@@ -59,28 +60,27 @@ class RateChange extends Command
 
             $Notices = DB::table('character_notifications')->where($where)
                 ->select('character_id','notification_id','timestamp','text')
+                ->where('text', 'LIKE', '%'.$corp->corporation_id.'%')
                 ->whereIn('character_id',$corp_members_ids[$corp->corporation_id])
+                ->groupBy('notification_id')
+                ->orderBy('timestamp','DESC')
                 ->get();
 
             // 开始处理数据 -> 插入 公司税率变动日志表
-            $changeData = [];
             foreach ($Notices as $key => $Notice) {
 
                 $text = explode(" ",$Notice->text);
 
-                $changeData[$key]['corporation_id'] = $corp->corporation_id;
-                $changeData[$key]['notification_id'] = $Notice->notification_id;
-                $changeData[$key]['pve_taxrate_old'] = floatval($text[2]);
-                $changeData[$key]['pve_taxrate_new'] = floatval($text[3]);
-                $changeData[$key]['begin_time'] = $Notice->timestamp;
-                $changeData[$key]['end_time'] = $key > 0 ? $changeData[$key]['end_time'] = $Notices[$key-1]->timestamp : null;
-                $changeData[$key]['created_at'] = date('Y-m-d H:i:s');
-                $changeData[$key]['updated_at'] = date('Y-m-d H:i:s');
+                $changeData = [];
+                $changeData['corporation_id'] = $corp->corporation_id;
+                $changeData['notification_id'] = $Notice->notification_id;
+                $changeData['pve_taxrate_new'] = floatval($text[2]);
+                $changeData['pve_taxrate_old'] = floatval($text[3]);
+                $changeData['begin_time'] = $Notice->timestamp;
+                $changeData['end_time'] = $key > 0 ? $Notices[$key-1]->timestamp : NULL;
 
-
+                RateChangeModel::updateOrCreate($changeData);
             }
-
-            RateChangeModel::updateOrCreate($changeData);
 
         }
 
