@@ -44,7 +44,8 @@ class CreateSeatTaxTables extends Migration
         Schema::create('seat_tax_rate_change', function (Blueprint $table) {
             $table->increments('id');
             $table->bigInteger('corporation_id')->comment('公司ID');
-            $table->smallInteger('pve_taxrate')->comment('PVE税率');
+            $table->smallInteger('pve_taxrate_old')->comment('PVE税率 - 旧');
+            $table->smallInteger('pve_taxrate_new')->comment('PVE税率 - 新');
             $table->timestamp('begin_time')->comment('开始时间');
             $table->timestamp('end_time')->comment('结束时间');
             $table->timestamps();
