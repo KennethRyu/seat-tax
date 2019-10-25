@@ -15,7 +15,6 @@ use Seat\Services\Repositories\Corporation\Ledger;
 use Seat\Services\Repositories\Corporation\MiningLedger;
 
 use Denngarr\Seat\Billing\Validation\ValidateSettings;
-use Denngarr\Seat\Billing\Helpers\BillingHelper;
 
 use Seat\Eveapi\Models\Wallet\CorporationWalletJournal;
 use Ryu\Seat\Tax\Models\RateChangeModel;
@@ -23,11 +22,12 @@ use Ryu\Seat\Tax\Models\CorpBillModel;
 
 use Seat\Eveapi\Models\Corporation\CorporationMember; // 公司员工
 use Seat\Eveapi\Models\RefreshToken; // 授权token
+use Ryu\Seat\Tax\Helpers\TaxHelper;
 
 
 class TaxController extends Controller
 {
-    use MiningLedger, Ledger, CharacterLedger, BillingHelper;
+    use TaxHelper;
 
     protected $begin_time = "";
     protected $end_time   = "";

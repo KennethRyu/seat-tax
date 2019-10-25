@@ -5,7 +5,7 @@ namespace Ryu\Seat\Tax\Helpers;
 use Denngarr\Seat\Billing\Models\CharacterBill;
 use Denngarr\Seat\Billing\Models\CorporationBill;
 use Illuminate\Support\Facades\DB;
-use Ryu\Seat\Tax\Models\CorpBillModel;
+
 use Seat\Eveapi\Models\Character\CharacterInfo;
 use Seat\Eveapi\Models\Corporation\CorporationInfo;
 use Seat\Eveapi\Models\Industry\CharacterMining;
@@ -13,6 +13,8 @@ use Seat\Eveapi\Models\Wallet\CorporationWalletJournal;
 use Seat\Services\Models\UserSetting;
 use Seat\Services\Repositories\Corporation\Members;
 use Seat\Web\Models\User;
+
+use Ryu\Seat\Tax\Models\CorpBillModel;
 
 trait TaxHelper
 {
@@ -174,7 +176,7 @@ trait TaxHelper
      */
     private function getCorporationBillByMonth($year, $month)
     {
-        return CorporationBill::with('corporation')
+        return CorpBillModel::with('corporation')
             ->where("month", $month)
             ->where("year", $year)
             ->get();

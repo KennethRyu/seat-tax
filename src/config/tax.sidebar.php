@@ -3,7 +3,7 @@
 return [
     'seat_tax' => [
         'name'          => 'SeAT税务',
-        'icon'          => 'fa-group',
+        'icon'          => 'fa-credit-card',
         'route_segment' => 'seat_tax',
         'permission'    => 'seat_tax.view',
         'entries' => [
