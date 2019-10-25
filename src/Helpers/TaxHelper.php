@@ -176,10 +176,12 @@ trait TaxHelper
      */
     private function getCorporationBillByMonth($year, $month)
     {
+
         return CorpBillModel::with('corporation')
-            ->where("month", $month)
-            ->where("year", $year)
-            ->get();
+                ->where("month", $month)
+                ->where("year", $year)
+                ->get();
+
     }
 
     /**

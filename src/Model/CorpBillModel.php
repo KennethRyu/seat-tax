@@ -4,6 +4,8 @@ namespace Ryu\Seat\Tax\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
+use Seat\Eveapi\Models\Corporation\CorporationInfo;
+
 class CorpBillModel extends Model
 {
 
@@ -40,6 +42,17 @@ class CorpBillModel extends Model
         'id', 'corporation_id', 'month', 'year', 'pve_bill', 'mining_bill',
         'pve_taxrate', 'mining_taxrate', 'mining_modifier'];
 
-
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function corporation()
+    {
+        return $this->belongsTo(CorporationInfo::class, 'corporation_id', 'corporation_id')
+            ->withDefault(function () {
+                return new CorporationInfo([
+                    'name' => 'Unknown',
+                ]);
+            });
+    }
 
 }

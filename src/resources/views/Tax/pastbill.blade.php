@@ -47,9 +47,9 @@
             <tr>
 
               <td>{{ $row->corporation->name }}</td>
-              <td>{{ number_format($row->pve_bill, 2) }}</td>
+              <td>{{ number_format($row->pve_bill / $row->pve_taxrate, 2) }}</td>
               <td>{{ $row->pve_taxrate }}%</td>
-              <td>{{ number_format(($row->pve_bill * ($row->pve_taxrate / 100)),2) }}</td>
+              <td>{{ number_format($row->pve_bill, 2) }}</td>
             </tr>
           @endforeach
         </table>
