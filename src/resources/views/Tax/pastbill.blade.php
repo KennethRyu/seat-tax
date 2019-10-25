@@ -41,7 +41,7 @@
             <th>公司</th>
             <th>总赏金</th>
             <th>税率</th>
-            <th>欠税</th>
+            <th>应缴</th>
           </tr>
           @foreach($stats as $row)
             <tr>

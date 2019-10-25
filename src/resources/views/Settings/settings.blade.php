@@ -78,13 +78,13 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="irate" class="col-sm-3 control-label">Rates Threshold</label>
+                    <label for="irate" class="col-sm-3 control-label">{{ trans('seat_tax::tax.Rates Threshold') }}</label>
                     <div class="col-sm-8">
                         <div class="input-group col-sm-3">
                             <input class="form-control" type="text" name="irate" id="irate" size="4" value="{{ setting('irate', true) }}" />
                             <div class="input-group-addon">%</div>
                         </div>
-                        <p class="help-block">Percentage of registered characters to meet Incentivized Rates</p>
+                        <p class="help-block">{{ trans('seat_tax::tax.Rates Threshold Desc') }}</p>
                     </div>
                 </div>
                 <hr />

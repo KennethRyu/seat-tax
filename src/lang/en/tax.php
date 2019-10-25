@@ -33,6 +33,9 @@ return [
     'value-at-ore-price'      => '矿石价格',
     'value-at-mineral-price'  => '矿物价格',
 
+    'Rates Threshold'         => 'SeAT 达标率阈值',
+    'Rates Threshold Desc'    => '符合达标率的百分比',
+
     // setting - right
     'setting-instructions'    => '设置说明',
 
@@ -48,8 +51,8 @@ return [
     'Bounty Tax Rate'         => '赏金税率',
     'Bounty Tax Rate Desc'    => '赏金奖励税率。 通常是5-10％',
 
-    'Incentivised Rates'      => '激励率',
-    'Incentivised Rates Desc' => '激励率仅基于每个公司。 这些折扣价是根据已在Seat上注册的公司成员数量（包括所有替代）而定的。 如果他们没有注册SeAT，那么该联盟就不会看到他们的采矿量，因此他们将获得更高的税率。',
+    'Incentivised Rates'      => 'SeAT 达标率',
+    'Incentivised Rates Desc' => '如果公司成员授权SeAT率不达标，因此公司将按照默认税率缴纳。',
 
     'Valuation of Ore'        => '矿石估价',
     'Valuation of Ore Desc'   => '矿石价值可以通过两种方法确定：按矿石类型或按矿物质含量确定。 如果您是在月球开采，最好使用矿物质含量，因为它更准确，因为Moon Goo很少由原始矿石出售，而更多地作为精炼产品出售。 这使月亮采矿保持诚实。',
