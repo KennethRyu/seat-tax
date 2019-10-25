@@ -12,15 +12,17 @@ use Seat\Eveapi\Models\Corporation\CorporationInfo;
 use Seat\Services\Repositories\Character\MiningLedger as CharacterLedger;
 use Seat\Services\Repositories\Corporation\Ledger;
 use Seat\Services\Repositories\Corporation\MiningLedger;
-use Denngarr\Seat\Billing\Models\CharacterBill;
-use Denngarr\Seat\Billing\Helpers\BillingHelper;
 
 use Seat\Eveapi\Models\Wallet\CorporationWalletJournal;
 use Ryu\Seat\Tax\Models\RateChangeModel;
 use Ryu\Seat\Tax\Models\CorpBillModel;
 
+use Ryu\Seat\Tax\Helpers\TaxHelper;
+
 class TaxBill extends Command
 {
+
+    use TaxHelper;
 
     /**
      * 控制台命令的名称和签名。
@@ -51,7 +53,7 @@ class TaxBill extends Command
 
         // 北京时间 -8
         $this->begin_time = date('Y-m-t', strtotime('-2 month')) . ' 16:00:00';
-        $this->end_time = date('Y-m-t', strtotime('-2 month')) . ' 15:59:59';
+        $this->end_time = date('Y-m-t', strtotime('-1 month')) . ' 15:59:59';
 
         $lastmonth = date('Y-n', strtotime('-1 month'));
         list($year, $month) = preg_split("/-/", $lastmonth, 2);
@@ -157,7 +159,7 @@ class TaxBill extends Command
                     $whereIndex = 5;
                 }
 
-                var_dump($val['begin_time'] > $this->end_time);
+//                var_dump($val['begin_time'] > $this->end_time);
 
                 // 当前税率
                 $taxRate    = $val['pve_taxrate_new'];
@@ -181,18 +183,18 @@ class TaxBill extends Command
                                     ->whereIn('ref_type',$whereIn)
                                     ->sum('amount');
 
-                var_dump('数据记录: ' .$val['begin_time'] .' ~ '. $val['end_time']);
-                var_dump('计算条件: ' . $whereIndex);
-                var_dump('军团钱包 '.$begin_time .' ~ '. $end_time .' : '. $amount);
-                var_dump('税率: '.$taxRate);
-                var_dump('实际产出: ' . $amount / ($taxRate/100) );
-                var_dump('上缴金额: ' . ($amount / ($taxRate/100)) * 0.05 );
-                var_dump('------------------------------------');
+//                var_dump('数据记录: ' .$val['begin_time'] .' ~ '. $val['end_time']);
+//                var_dump('计算条件: ' . $whereIndex);
+//                var_dump('军团钱包 '.$begin_time .' ~ '. $end_time .' : '. $amount);
+//                var_dump('税率: '.$taxRate);
+//                var_dump('实际产出: ' . $amount / ($taxRate/100) );
+//                var_dump('上缴金额: ' . ($amount / ($taxRate/100)) * 0.05 );
+//                var_dump('------------------------------------');
                 $sumTax += ($amount / ($taxRate/100)) * 0.05;
             }
 
-            var_dump('合计金额: ' . $sumTax );
-            var_dump('------------------完成------------------');
+//            var_dump('合计金额: ' . $sumTax );
+//            var_dump('------------------完成------------------');
             // 开始计算军团实际税务金额
             $rates = $this->getCorporateTaxRate($corp->corporation_id);
 
@@ -200,6 +202,11 @@ class TaxBill extends Command
             $bill->corporation_id = $corp->corporation_id;
             $bill->year = $year;
             $bill->month = $month;
+
+            $bill->mining_bill = $this->getMiningTotal($corp->corporation_id, $year, $month);
+            $bill->mining_taxrate = $rates['taxrate'];
+            $bill->mining_modifier = $rates['modifier'];
+
             $bill->pve_bill = $sumTax;
             $bill->pve_taxrate = $rates['pve'];
             $bill->save();

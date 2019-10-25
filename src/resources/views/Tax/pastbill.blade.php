@@ -1,7 +1,7 @@
 @extends('web::layouts.grids.12')
 
-@section('title', trans('billing::billing.pastbill'))
-@section('page_header', trans('billing::billing.pastbill'))
+@section('title', trans('seat_tax::tax.pastbill'))
+@section('page_header', trans('seat_tax::tax.pastbill'))
 
 @section('full')
   <input type="hidden" id="year" value="{{ $year }}">
@@ -9,7 +9,7 @@
 
   <div class="box box-default box-solid">
     <div class="box-header with-border">
-      <h4>{{ trans('billing::billing.previousbill') }}</h4>
+      <h4>{{ trans('seat_tax::tax.previousbill') }}</h4>
     </div>
     <div class="box-body">
       @foreach($dates->chunk(3) as $date)
@@ -29,43 +29,19 @@
 
   <div class="nav-tabs-custom">
     <ul class="nav nav-tabs pull-right bg-gray">
-      <li><a href="#tab3" data-toggle="tab">{{ trans('billing::billing.summary-ind-mining') }}</a></li>
-      <li><a href="#tab2" data-toggle="tab">{{ trans('billing::billing.summary-corp-pve') }}</a></li>
-      <li class="active"><a href="#tab1" data-toggle="tab">{{ trans('billing::billing.summary-corp-mining') }}</a></li>
+      <li class="active"><a href="#tab2" data-toggle="tab">{{ trans('seat_tax::tax.summary-corp-pve') }}</a></li>
       <li class="pull-left header">
-        <i class="fa fa-history"></i> Previous Bills {{ $year }} - {{ $month }}
+        <i class="fa fa-history"></i> {{ trans('seat_tax::tax.previousbill') }} {{ $year }} - {{ $month }}
       </li>
     </ul>
     <div class="tab-content">
-      <div class="tab-pane active" id="tab1">
+      <div class="tab-pane active" id="tab2">
         <table class="table table-striped">
           <tr>
-            <th>Corporation</th>
-            <th>Mined Amount</th>
-            <th>Percentage of Market Value</th>
-            <th>Adjusted Value</th>
-            <th>Tax Rate</th>
-            <th>Tax Owed</th>
-          </tr>
-          @foreach($stats as $row)
-            <tr>
-              <td>{{ $row->corporation->name }}</td>
-              <td>{{ number_format($row->mining_bill, 2) }}</td>
-              <td>{{ $row->mining_modifier }}%</td>
-              <td>{{ number_format(($row->mining_bill * ($row->mining_modifier / 100)),2) }}</td>
-              <td>{{ $row->mining_taxrate }}%</td>
-              <td>{{ number_format((($row->mining_bill * ($row->mining_modifier / 100)) * ($row->mining_taxrate / 100)),2) }}</td>
-            </tr>
-          @endforeach
-        </table>
-      </div>
-      <div class="tab-pane" id="tab2">
-        <table class="table table-striped">
-          <tr>
-            <th>Corporation</th>
-            <th>Total Bounties</th>
-            <th>Tax Rate</th>
-            <th>Tax Owed</th>
+            <th>公司</th>
+            <th>总赏金</th>
+            <th>税率</th>
+            <th>欠税</th>
           </tr>
           @foreach($stats as $row)
             <tr>
@@ -76,29 +52,6 @@
               <td>{{ number_format(($row->pve_bill * ($row->pve_taxrate / 100)),2) }}</td>
             </tr>
           @endforeach
-        </table>
-      </div>
-      <div class="tab-pane" id="tab3">
-        <div class="col-md-6">
-          <select class="select" style="width: 50%" id="corpspinner">
-            <option disabled selected value="0">Please Choose a Corp</option>
-            @foreach($stats as $row)
-              <option value="{{ $row->corporation->corporation_id }}">{{ $row->corporation->name }}</option>
-            @endforeach
-          </select>
-        </div>
-        <table class="table compact table-condensed table-hover table-responsive table-striped" id='indivmining'>
-          <thead>
-          <tr>
-            <th>Character Name</th>
-            <th>Mining Amount</th>
-            <th>Market Modifier</th>
-            <th>Mining Tax</th>
-            <th>Tax Due</th>
-          </tr>
-          </thead>
-          <tbody>
-          </tbody>
         </table>
       </div>
     </div>
